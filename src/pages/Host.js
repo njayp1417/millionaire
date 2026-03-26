@@ -145,6 +145,7 @@ export default function Host() {
       const shuffled = [...q.options].sort(() => Math.random() - 0.5);
       q.options = shuffled;
       setQuestion(q);
+      setSelectedSubject('');
       await supabase.from('game_sessions').update({
         current_question: q,
         answer_result: null,
