@@ -130,6 +130,7 @@ export default function Host() {
     setLoading(true);
     setAnswerResult(null);
     setEliminatedOptions([]);
+    setSelectedAnswer(null);
     setTimerActive(false);
     setTimerStartedAt(null);
 
@@ -141,7 +142,6 @@ export default function Host() {
 
     if (!error && data.length > 0) {
       const q = { ...data[Math.floor(Math.random() * data.length)] };
-      // Shuffle options so correct answer is in a random position
       const shuffled = [...q.options].sort(() => Math.random() - 0.5);
       q.options = shuffled;
       setQuestion(q);
@@ -175,6 +175,7 @@ export default function Host() {
     setTimerStartedAt(null);
     const nextLevel = result === 'correct' ? Math.min(prizeLevel + 1, 50) : prizeLevel;
     if (result === 'correct') setPrizeLevel(nextLevel);
+
     await supabase.from('game_sessions').update({
       answer_result: result,
       prize_level: nextLevel,
@@ -182,8 +183,9 @@ export default function Host() {
       timer_started_at: null,
       selected_answer: null,
     }).eq('id', sessionId);
-    // Auto-end game on wrong answer or reaching top level
-    if (result === 'wrong' || nextLevel === 50) {
+
+    // Only end game on wrong answer — winning all 50 is handled separately
+    if (result === 'wrong') {
       await endGame();
     }
   };
