@@ -64,30 +64,37 @@ export default function Host() {
     if (!user || user.role !== 'host') navigate('/');
   }, [user, navigate]);
 
-  // Init lobby session for chat
+  // Restore full session state on mount (handles page refresh / returning to app)
   useEffect(() => {
-    const initChat = async () => {
+    const initSession = async () => {
       const { data } = await supabase
         .from('game_sessions')
-        .select('id')
-        .eq('status', 'active')
+        .select('*')
+        .in('status', ['active', 'lobby'])
         .order('created_at', { ascending: false })
         .limit(1)
         .single();
-      if (data) {
-        setChatSessionId(data.id);
-        setSessionId(data.id);
-      } else {
-        const { data: lobby } = await supabase
-          .from('game_sessions')
-          .insert({ prize_level: 1, timer_active: false, status: 'lobby' })
-          .select()
-          .single();
-        if (lobby) setChatSessionId(lobby.id);
+
+      if (!data) return;
+
+      setChatSessionId(data.id);
+      setSessionId(data.id);
+
+      if (data.status === 'active') {
+        setSession(data);
+        setPrizeLevel(data.prize_level ?? 1);
+        setQuestion(data.current_question ?? null);
+        setAnswerResult(data.answer_result ?? null);
+        setAudienceData(data.audience_data ?? null);
+        setEliminatedOptions(data.eliminated_options ?? []);
+        setSelectedAnswer(data.selected_answer ?? null);
+        setTimerActive(data.timer_active ?? false);
+        setTimerStartedAt(data.timer_started_at ?? null);
+        setGameStatus(data.status);
       }
     };
-    initChat();
-  }, []);
+    initSession();
+  }, []); // eslint-disable-line
 
   // Poll session every 3s as realtime fallback — full sync so selectedAnswer is always fresh
   useSessionPolling(sessionId, (data) => {
