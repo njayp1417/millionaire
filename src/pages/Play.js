@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../supabase';
 import { useAuth } from '../context/AuthContext';
 import { useGame } from '../context/GameContext';
@@ -38,7 +38,7 @@ export default function Play() {
   // Clear any stale state from a previous session on mount
   useEffect(() => { reset(); }, []); // eslint-disable-line
 
-  const applySessionData = (data) => {
+  const applySessionData = useCallback((data) => {
     setQuestion(data.current_question ?? null);
     setPrizeLevel(data.prize_level ?? 1);
     setAnswerResult(data.answer_result ?? null);
@@ -48,7 +48,7 @@ export default function Play() {
     setTimerActive(data.timer_active ?? false);
     setTimerStartedAt(data.timer_started_at ?? null);
     setGameStatus(data.status ?? null);
-  };
+  }, [setQuestion, setPrizeLevel, setAnswerResult, setAudienceData, setEliminatedOptions, setSelectedAnswer, setGameStatus]); // eslint-disable-line
 
   useSessionPolling(sessionId, applySessionData);
 
@@ -96,7 +96,7 @@ export default function Play() {
   useEffect(() => {
     if (!sessionId) return;
     const channel = supabase
-      .channel(`play-session:${sessionId}`)
+      .channel(`play-session:${sessionId}:${Date.now()}`)
       .on('postgres_changes', {
         event: '*',
         schema: 'public',
@@ -107,7 +107,7 @@ export default function Play() {
       })
       .subscribe();
     return () => supabase.removeChannel(channel);
-  }, [sessionId]); // eslint-disable-line
+  }, [sessionId, applySessionData]);
 
   const currentPrize = PRIZE_LADDER.find(p => p.level === prizeLevel);
 

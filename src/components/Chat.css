@@ -14,7 +14,18 @@
   font-size: 13px;
   border-bottom: 1px solid rgba(255, 215, 0, 0.15);
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
+
+.chat-status {
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.chat-status.online { color: #00e676; }
+.chat-status.offline { color: rgba(255,255,255,0.3); }
 
 .chat-messages {
   flex: 1;

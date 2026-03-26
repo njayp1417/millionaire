@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { supabase } from '../supabase';
 import { useAuth } from '../context/AuthContext';
 import './Chat.css';
@@ -12,17 +12,23 @@ export default function Chat({ sessionId }) {
   const { user } = useAuth();
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState('');
+  const [connected, setConnected] = useState(false);
   const bottomRef = useRef(null);
   const seenIds = useRef(new Set());
 
-  const addMessage = (msg) => {
+  const addMessage = useCallback((msg) => {
     if (seenIds.current.has(msg.id)) return;
     seenIds.current.add(msg.id);
     setMessages(prev => [...prev, msg]);
-  };
+  }, []);
 
   useEffect(() => {
     if (!sessionId) return;
+
+    // Reset on new session
+    seenIds.current = new Set();
+    setMessages([]);
+    setConnected(false);
 
     // Load existing messages
     supabase
@@ -34,9 +40,9 @@ export default function Chat({ sessionId }) {
         if (data) data.forEach(addMessage);
       });
 
-    // Subscribe to new messages
+    // Subscribe to new messages with status tracking
     const channel = supabase
-      .channel(`chat:${sessionId}`)
+      .channel(`chat:${sessionId}:${Date.now()}`)
       .on('postgres_changes', {
         event: 'INSERT',
         schema: 'public',
@@ -45,11 +51,15 @@ export default function Chat({ sessionId }) {
       }, ({ new: msg }) => {
         addMessage(msg);
       })
-      .subscribe();
+      .subscribe((status) => {
+        setConnected(status === 'SUBSCRIBED');
+      });
 
-    return () => supabase.removeChannel(channel);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sessionId]);
+    return () => {
+      supabase.removeChannel(channel);
+      setConnected(false);
+    };
+  }, [sessionId, addMessage]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -73,7 +83,6 @@ export default function Chat({ sessionId }) {
       message: optimistic.message,
     }).select().single();
 
-    // Replace optimistic entry with real one from DB
     if (data) {
       seenIds.current.add(data.id);
       setMessages(prev => prev.map(m => m.id === optimistic.id ? data : m));
@@ -86,7 +95,12 @@ export default function Chat({ sessionId }) {
 
   return (
     <div className="chat-container">
-      <div className="chat-header">💬 Live Chat</div>
+      <div className="chat-header">
+        💬 Live Chat
+        <span className={`chat-status ${connected ? 'online' : 'offline'}`}>
+          {connected ? '● live' : '○ connecting...'}
+        </span>
+      </div>
       <div className="chat-messages">
         {messages.map((m) => (
           <div key={m.id} className={`chat-msg ${m.sender === user.name ? 'mine' : 'theirs'}`}>
