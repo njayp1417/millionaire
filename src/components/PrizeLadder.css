@@ -1,0 +1,53 @@
+.prize-ladder {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 2px;
+  padding: 10px;
+  background: rgba(0, 0, 60, 0.85);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  min-width: 140px;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.prize-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  color: #ccc;
+  font-size: 12px;
+  transition: all 0.3s;
+  border: 1px solid transparent;
+}
+
+.prize-row.safe {
+  color: #ffd700;
+  border-color: rgba(255, 215, 0, 0.3);
+}
+
+.prize-row.active {
+  background: linear-gradient(90deg, #ffd700, #ff8c00);
+  color: #000;
+  font-weight: 700;
+  border-color: #ffd700;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+}
+
+.prize-level {
+  width: 18px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.prize-label { flex: 1; }
+
+.safe-badge { font-size: 10px; }
+
+@media (min-width: 768px) {
+  .prize-ladder { min-width: 160px; padding: 12px; gap: 4px; }
+  .prize-row { font-size: 13px; padding: 6px 10px; }
+}

@@ -1,0 +1,123 @@
+.login-page {
+  min-height: 100vh;
+  background: radial-gradient(ellipse at center, #0d0d3b 0%, #000010 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', sans-serif;
+  padding: 16px;
+}
+
+.login-box {
+  text-align: center;
+  padding: 32px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  width: 100%;
+  max-width: 480px;
+}
+
+.login-logo {
+  font-size: 44px;
+  margin-bottom: 12px;
+}
+
+.login-title {
+  color: #ffd700;
+  font-size: 20px;
+  font-weight: 800;
+  margin: 0 0 8px;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}
+
+.login-sub {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 13px;
+  margin: 0 0 28px;
+}
+
+.login-cards {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+}
+
+.login-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 16px;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: rgba(255, 255, 255, 0.05);
+  flex: 1;
+  max-width: 160px;
+}
+
+.login-card.host { border-color: rgba(255, 140, 0, 0.5); }
+.login-card.host:hover {
+  background: rgba(255, 140, 0, 0.1);
+  border-color: #ff8c00;
+  box-shadow: 0 0 20px rgba(255, 140, 0, 0.3);
+}
+
+.login-card.player { border-color: rgba(255, 215, 0, 0.5); }
+.login-card.player:hover {
+  background: rgba(255, 215, 0, 0.1);
+  border-color: #ffd700;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.login-card-icon { font-size: 36px; }
+
+img.login-card-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 215, 0, 0.5);
+}
+
+.login-card-name {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.login-card-role {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@media (min-width: 480px) {
+  .login-box { padding: 48px 40px; }
+  .login-logo { font-size: 56px; }
+  .login-title { font-size: 24px; }
+  .login-card { padding: 24px 32px; }
+  img.login-card-icon { width: 72px; height: 72px; }
+  .login-card-name { font-size: 18px; }
+}
+
+.switch-btn {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.4);
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.switch-btn:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.5);
+}

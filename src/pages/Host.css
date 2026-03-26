@@ -1,0 +1,440 @@
+.host-page {
+  height: 100dvh;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at center, #0d0d3b 0%, #000010 100%);
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', sans-serif;
+  color: #fff;
+  overflow: hidden;
+}
+
+.host-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.host-brand {
+  color: #ffd700;
+  font-weight: 700;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
+}
+
+.host-prize-display {
+  color: #ffd700;
+  font-size: 14px;
+  font-weight: 800;
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
+  white-space: nowrap;
+}
+
+.logout-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/* Mobile: single column */
+.host-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+.host-left {
+  display: none;
+}
+
+.host-center {
+  flex: 1;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.host-right {
+  padding: 0;
+  border-top: 1px solid rgba(255, 215, 0, 0.1);
+  flex-shrink: 0;
+  transition: max-height 0.3s ease;
+}
+
+.host-right.open {
+  max-height: 280px;
+  overflow: hidden;
+}
+
+.host-right.closed {
+  max-height: 44px;
+  overflow: hidden;
+}
+
+.chat-toggle-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: rgba(255, 215, 0, 0.06);
+  border: none;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+  color: #ffd700;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  min-height: 44px;
+}
+
+.chat-toggle-icon {
+  font-size: 10px;
+  color: rgba(255, 215, 0, 0.6);
+}
+
+.big-btn {
+  align-self: center;
+  margin-top: 20px;
+  padding: 16px 36px;
+  background: linear-gradient(90deg, #ffd700, #ff8c00);
+  border: none;
+  border-radius: 50px;
+  color: #000;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+  min-height: 52px;
+}
+
+.subject-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.subject-select {
+  flex: 1;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+}
+
+.subject-select option { background: #0d0d3b; }
+
+.pick-btn {
+  padding: 10px 16px;
+  background: linear-gradient(90deg, #ffd700, #ff8c00);
+  border: none;
+  border-radius: 8px;
+  color: #000;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.pick-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.host-question-box {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.question-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.q-subject {
+  background: rgba(255, 215, 0, 0.12);
+  color: #ffd700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.q-difficulty {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255,255,255,0.6);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.question-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #fff;
+  margin: 0;
+}
+
+.host-answer-reveal {
+  background: rgba(0, 200, 83, 0.1);
+  border: 1px solid rgba(0, 200, 83, 0.3);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: #00c853;
+  font-size: 13px;
+}
+
+.host-controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.ctrl-btn {
+  flex: 1;
+  min-width: 120px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.2s;
+}
+
+.ctrl-btn:hover { background: rgba(255, 255, 255, 0.14); }
+
+.ctrl-btn.end-btn {
+  border-color: rgba(213, 0, 0, 0.4);
+  color: #ff5252;
+}
+
+.ctrl-btn.end-btn:hover {
+  background: rgba(213, 0, 0, 0.12);
+}
+
+.mark-row {
+  display: flex;
+  gap: 10px;
+}
+
+.mark-btn {
+  flex: 1;
+  padding: 14px 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  min-height: 48px;
+}
+
+.mark-btn.correct {
+  background: linear-gradient(90deg, #00c853, #00e676);
+  color: #000;
+}
+
+.mark-btn.wrong {
+  background: linear-gradient(90deg, #d50000, #ff1744);
+  color: #fff;
+}
+
+.mark-btn:hover { opacity: 0.85; }
+
+.result-banner {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 800;
+  padding: 14px;
+  border-radius: 10px;
+}
+
+.result-banner.correct {
+  background: rgba(0, 200, 83, 0.15);
+  color: #00e676;
+  border: 1px solid #00c853;
+}
+
+.result-banner.wrong {
+  background: rgba(213, 0, 0, 0.15);
+  color: #ff1744;
+  border: 1px solid #d50000;
+}
+
+.next-btn {
+  display: block;
+  margin: 12px auto 0;
+  padding: 10px 28px;
+  min-height: 44px;
+  background: linear-gradient(90deg, #ffd700, #ff8c00);
+  border: none;
+  border-radius: 50px;
+  color: #000;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.next-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.lifelines-row {
+  display: flex;
+  gap: 8px;
+}
+
+.lifeline-btn {
+  flex: 1;
+  padding: 12px 6px;
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  border-radius: 8px;
+  color: #ffd700;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 44px;
+}
+
+.lifeline-btn:hover:not(:disabled) {
+  background: rgba(255, 215, 0, 0.2);
+}
+
+.lifeline-btn.used {
+  opacity: 0.3;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+/* Tablet and up */
+@media (min-width: 768px) {
+  .host-brand { font-size: 16px; }
+  .host-prize-display { font-size: 22px; }
+  .host-header { padding: 14px 24px; }
+
+  .host-body {
+    flex-direction: row;
+    overflow: hidden;
+    flex: 1;
+  }
+
+  .host-left {
+    display: block;
+    padding: 20px 12px;
+    border-right: 1px solid rgba(255, 215, 0, 0.1);
+  }
+
+  .host-center { padding: 24px; gap: 16px; }
+
+  .host-right {
+    width: 280px;
+    padding: 0;
+    border-top: none;
+    border-left: 1px solid rgba(255, 215, 0, 0.1);
+    max-height: none !important;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .host-right.open { max-height: none; }
+  .host-right.closed { max-height: none; }
+
+  .chat-toggle-bar { display: none; }
+
+  .ladder-toggle-btn { display: none; }
+  .ladder-drawer-overlay { display: none; }
+
+  .big-btn { margin-top: 80px; padding: 18px 48px; font-size: 18px; }
+  .question-text { font-size: 17px; }
+  .lifeline-btn { font-size: 13px; }
+}
+
+/* Ladder drawer */
+.ladder-toggle-btn {
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.35);
+  color: #ffd700;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.ladder-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 500;
+  display: flex;
+  align-items: flex-end;
+}
+
+.ladder-drawer {
+  width: 100%;
+  max-height: 75vh;
+  background: linear-gradient(160deg, #0a0a2e, #1a1a5e);
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.ladder-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+  color: #ffd700;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.ladder-drawer-close {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.ladder-drawer .prize-ladder {
+  flex: 1;
+  overflow-y: auto;
+  max-height: none;
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  -webkit-overflow-scrolling: touch;
+}

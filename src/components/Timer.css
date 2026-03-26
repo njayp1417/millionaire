@@ -1,0 +1,23 @@
+.timer-wrap {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.timer-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.timer-text {
+  font-size: 15px;
+  font-weight: 700;
+  z-index: 1;
+  font-family: monospace;
+}

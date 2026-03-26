@@ -1,0 +1,75 @@
+.prize-tracker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: rgba(0, 0, 40, 0.85);
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.pt-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 36px;
+}
+
+.pt-q {
+  color: #ffd700;
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 1;
+}
+
+.pt-of {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 10px;
+}
+
+.pt-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pt-bar-track {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.pt-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ffd700, #ff8c00);
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+.pt-labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pt-current {
+  color: #ffd700;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.pt-safe {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 11px;
+}
+
+.pt-right {
+  min-width: 36px;
+  text-align: right;
+}
+
+.pt-pct {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 11px;
+}
