@@ -6,7 +6,6 @@ import { useSyncedTimer } from '../hooks/useSyncedTimer';
 import { useSessionPolling } from '../hooks/useSessionPolling';
 import { PRIZE_LADDER, QUESTION_TIMER } from '../constants';
 import PrizeLadder from '../components/PrizeLadder';
-import PrizeTracker from '../components/PrizeTracker';
 import AnswerOption from '../components/AnswerOption';
 import Chat from '../components/Chat';
 import AudienceModal from '../components/AudienceModal';
